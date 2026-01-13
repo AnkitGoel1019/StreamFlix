@@ -24,11 +24,8 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center space-x-8">
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="bg-gradient-to-br from-red-600 to-purple-600 p-2 rounded-lg transform group-hover:scale-110 transition-transform duration-300">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 18c-3.86-.96-7-5.54-7-10V8.3l7-3.11 7 3.11V10c0 4.46-3.14 9.04-7 10z" />
-                  <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
-                </svg>
+              <div className="transform group-hover:scale-110 transition-transform duration-300">
+                <img src="/favicon.png" alt="StreamFlix Logo" className="w-10 h-10 rounded-lg shadow-lg" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-500 bg-clip-text text-transparent">
                 StreamFlix

@@ -107,7 +107,7 @@ const HeroCarousel = ({ items }) => {
   return (
     <div
       ref={containerRef}
-      className="relative h-[85vh] min-h-[600px] w-full bg-slate-900 overflow-hidden group"
+      className="relative h-[60vh] sm:h-[75vh] lg:h-[85vh] min-h-[450px] sm:min-h-[600px] w-full bg-slate-900 overflow-hidden group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -122,7 +122,7 @@ const HeroCarousel = ({ items }) => {
 
         {/* Video Layer */}
         {showVideo && videoKey && (
-          <div className="absolute inset-0 w-full h-full scale-125 pointer-events-none">
+          <div className="absolute inset-0 w-full h-full scale-110 sm:scale-125 lg:scale-150 pointer-events-none">
             <iframe
               className="w-full h-full"
               src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${videoKey}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`}
@@ -133,21 +133,21 @@ const HeroCarousel = ({ items }) => {
         )}
 
         {/* Hotstar-style Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 lg:via-slate-900/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
       </div>
 
       {/* Content Container */}
-      <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-        <div className="max-w-2xl pt-20">
-          <h1 className="text-6xl md:text-8xl font-black text-white mb-6 drop-shadow-2xl tracking-tighter transition-all duration-700 transform">
+      <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-end sm:items-center pb-20 sm:pb-0">
+        <div className="max-w-2xl pt-10 sm:pt-20">
+          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-white mb-4 sm:mb-6 drop-shadow-2xl tracking-tighter transition-all duration-700 transform line-clamp-2">
             {title}
           </h1>
 
-          <div className="flex items-center space-x-6 mb-8 text-white/90 font-bold text-lg">
+          <div className="flex items-center space-x-4 sm:space-x-6 mb-4 sm:mb-8 text-white/90 font-bold text-sm sm:text-lg">
             {rating && (
-              <div className="flex items-center space-x-2">
-                <svg className="w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24">
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <svg className="w-4 h-4 sm:w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24">
                   <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                 </svg>
                 <span>{rating}</span>
@@ -156,43 +156,43 @@ const HeroCarousel = ({ items }) => {
             <span>•</span>
             <span>{new Date(currentItem.release_date || currentItem.first_air_date).getFullYear()}</span>
             <span>•</span>
-            <span className="uppercase tracking-widest text-sm bg-white/20 px-2 py-0.5 rounded">{mediaType}</span>
+            <span className="uppercase tracking-widest text-[10px] sm:text-sm bg-white/20 px-1.5 py-0.5 rounded">{mediaType}</span>
           </div>
 
-          <p className="text-slate-200 text-xl md:text-2xl mb-10 line-clamp-3 leading-relaxed font-medium drop-shadow-lg max-w-xl">
+          <p className="text-slate-200 text-sm sm:text-xl lg:text-2xl mb-6 sm:mb-10 line-clamp-3 leading-relaxed font-medium drop-shadow-lg max-w-md sm:max-w-xl">
             {currentItem.overview}
           </p>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 sm:space-x-4 mb-4">
             <Link
               to={linkPath}
-              className="flex items-center space-x-3 bg-white hover:bg-slate-200 text-black font-black px-10 py-4 rounded-xl transition-all transform hover:scale-105 shadow-2xl"
+              className="flex items-center space-x-2 sm:space-x-3 bg-white hover:bg-slate-200 text-black font-black px-6 sm:px-10 py-3 sm:py-4 rounded-lg sm:rounded-xl transition-all transform hover:scale-105 shadow-2xl"
             >
-              <svg className="w-7 h-7 fill-current" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-7 h-7 fill-current" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
-              <span className="text-lg">More Info</span>
+              <span className="text-sm sm:text-lg whitespace-nowrap">More Info</span>
             </Link>
 
-            <button className="flex items-center space-x-3 bg-slate-800/60 hover:bg-slate-700/80 backdrop-blur-md text-white font-black px-10 py-4 rounded-xl transition-all shadow-2xl border border-white/10">
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="flex items-center space-x-2 sm:space-x-3 bg-slate-800/60 hover:bg-slate-700/80 backdrop-blur-md text-white font-black px-6 sm:px-10 py-3 sm:py-4 rounded-lg sm:rounded-xl transition-all shadow-2xl border border-white/10">
+              <svg className="w-5 h-5 sm:w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
               </svg>
-              <span className="text-lg">My List</span>
+              <span className="text-sm sm:text-lg whitespace-nowrap">My List</span>
             </button>
 
             {videoKey && showVideo && (
               <button
                 onClick={() => setIsMuted(!isMuted)}
-                className="p-4 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white transition-all border border-white/20"
+                className="p-3 sm:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white transition-all border border-white/20"
               >
                 {isMuted ? (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
                   </svg>
                 ) : (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                 )}
@@ -202,28 +202,28 @@ const HeroCarousel = ({ items }) => {
         </div>
       </div>
 
-      {/* Carousel Navigation Buttons (Glassy) */}
+      {/* Carousel Navigation Buttons (Glassy) - Hidden on smallest screens for touch usability */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100 border border-white/10"
+        className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 p-3 lg:p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100 border border-white/10 z-20"
         aria-label="Previous slide"
       >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100 border border-white/10"
+        className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 p-3 lg:p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100 border border-white/10 z-20"
         aria-label="Next slide"
       >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
       {/* Carousel Indicators (Hotstar Style) */}
-      <div className="absolute bottom-10 right-10 flex space-x-3">
+      <div className="absolute bottom-6 sm:bottom-10 right-4 sm:right-10 flex space-x-2 sm:space-x-3 z-20">
         {carouselItems.map((_, index) => (
           <button
             key={index}
