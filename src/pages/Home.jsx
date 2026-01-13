@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTrending, getPopularMovies, getPopularTVShows, discoverMovies } from "../services/api";
-import HeroBanner from "../components/HeroBanner";
+import HeroCarousel from "../components/HeroCarousel";
 import ContentCarousel from "../components/ContentCarousel";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorMessage from "../components/ErrorMessage";
@@ -65,7 +65,7 @@ const Home = () => {
       setDocumentaries(docData.results || []);
 
       if (trendingWeekData.results && trendingWeekData.results.length > 0) {
-        setHeroItem(trendingWeekData.results[0]);
+        setHeroItem(trendingWeekData.results.slice(0, 10));
       }
 
       setLoading(false);
@@ -96,7 +96,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      {heroItem && <HeroBanner item={heroItem} mediaType={heroItem.media_type || "movie"} />}
+      {heroItem && <HeroCarousel items={heroItem} />}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12">
