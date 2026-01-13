@@ -168,7 +168,9 @@ export const discoverMovies = async (filters = {}) => {
     voteAverageGte,
     voteAverageLte,
     withRuntimeGte,
-    withRuntimeLte
+    withRuntimeLte,
+    withOriginalLanguage,
+    region
   } = filters;
 
   return fetchFromAPI("/discover/movie", {
@@ -179,7 +181,9 @@ export const discoverMovies = async (filters = {}) => {
     "vote_average.gte": voteAverageGte,
     "vote_average.lte": voteAverageLte,
     "with_runtime.gte": withRuntimeGte,
-    "with_runtime.lte": withRuntimeLte
+    "with_runtime.lte": withRuntimeLte,
+    with_original_language: withOriginalLanguage,
+    region
   });
 };
 
@@ -190,7 +194,8 @@ export const discoverTV = async (filters = {}) => {
     withGenres,
     firstAirDateYear,
     voteAverageGte,
-    voteAverageLte
+    voteAverageLte,
+    withOriginalLanguage
   } = filters;
 
   return fetchFromAPI("/discover/tv", {
@@ -199,7 +204,8 @@ export const discoverTV = async (filters = {}) => {
     with_genres: withGenres,
     first_air_date_year: firstAirDateYear,
     "vote_average.gte": voteAverageGte,
-    "vote_average.lte": voteAverageLte
+    "vote_average.lte": voteAverageLte,
+    with_original_language: withOriginalLanguage
   });
 };
 

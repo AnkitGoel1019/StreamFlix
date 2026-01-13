@@ -18,6 +18,9 @@ const Home = () => {
   const [horrorMovies, setHorrorMovies] = useState([]);
   const [romanceMovies, setRomanceMovies] = useState([]);
   const [documentaries, setDocumentaries] = useState([]);
+  const [hollywoodMovies, setHollywoodMovies] = useState([]);
+  const [bollywoodMovies, setBollywoodMovies] = useState([]);
+  const [tollywoodMovies, setTollywoodMovies] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,7 +44,10 @@ const Home = () => {
         comedyData,
         horrorData,
         romanceData,
-        docData
+        docData,
+        hollywoodData,
+        bollywoodData,
+        tollywoodData
       ] = await Promise.all([
         getTrending("all", "day"),
         getTrending("all", "week"),
@@ -51,7 +57,10 @@ const Home = () => {
         discoverMovies({ withGenres: "35" }), // Comedy
         discoverMovies({ withGenres: "27" }), // Horror
         discoverMovies({ withGenres: "10749" }), // Romance
-        discoverMovies({ withGenres: "99" }) // Documentaries
+        discoverMovies({ withGenres: "99" }), // Documentaries
+        discoverMovies({ withOriginalLanguage: "en", region: "US" }), // Hollywood
+        discoverMovies({ withOriginalLanguage: "hi", region: "IN" }), // Bollywood
+        discoverMovies({ withOriginalLanguage: "te", region: "IN" })  // Tollywood
       ]);
 
       setTrendingToday(trendingDayData.results || []);
@@ -63,6 +72,9 @@ const Home = () => {
       setHorrorMovies(horrorData.results || []);
       setRomanceMovies(romanceData.results || []);
       setDocumentaries(docData.results || []);
+      setHollywoodMovies(hollywoodData.results || []);
+      setBollywoodMovies(bollywoodData.results || []);
+      setTollywoodMovies(tollywoodData.results || []);
 
       if (trendingWeekData.results && trendingWeekData.results.length > 0) {
         setHeroItem(trendingWeekData.results.slice(0, 10));
@@ -131,6 +143,9 @@ const Home = () => {
           <ContentCarousel title="Action Hits" items={actionMovies.slice(0, 20)} mediaType="movie" />
           <ContentCarousel title="Comedies" items={comedyMovies.slice(0, 20)} mediaType="movie" />
           <ContentCarousel title="Popular TV Shows" items={popularTV.slice(0, 20)} mediaType="tv" />
+          <ContentCarousel title="Hollywood Blockbusters" items={hollywoodMovies.slice(0, 20)} mediaType="movie" />
+          <ContentCarousel title="Bollywood Hits" items={bollywoodMovies.slice(0, 20)} mediaType="movie" />
+          <ContentCarousel title="Tollywood Specials" items={tollywoodMovies.slice(0, 20)} mediaType="movie" />
           <ContentCarousel title="Horror Flicks" items={horrorMovies.slice(0, 20)} mediaType="movie" />
           <ContentCarousel title="Romantic Movies" items={romanceMovies.slice(0, 20)} mediaType="movie" />
           <ContentCarousel title="Documentaries" items={documentaries.slice(0, 20)} mediaType="movie" />
