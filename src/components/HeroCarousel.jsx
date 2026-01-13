@@ -9,6 +9,7 @@ const HeroCarousel = ({ items }) => {
   const [videoKey, setVideoKey] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
   const [isIntersecting, setIsIntersecting] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const carouselItems = items?.slice(0, 10) || [];
 
   const containerRef = useRef(null);
@@ -39,15 +40,19 @@ const HeroCarousel = ({ items }) => {
     setCurrentIndex((prev) => (prev === carouselItems.length - 1 ? 0 : prev + 1));
   }, [carouselItems.length]);
 
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev === 0 ? carouselItems.length - 1 : prev - 1));
+  }, [carouselItems.length]);
+
   // Auto-scroll logic
   useEffect(() => {
-    if (!isIntersecting) return;
+    if (!isIntersecting || isHovered) return;
 
     timeoutRef.current = setInterval(nextSlide, 8000);
     return () => {
       if (timeoutRef.current) clearInterval(timeoutRef.current);
     };
-  }, [nextSlide, isIntersecting]);
+  }, [nextSlide, isIntersecting, isHovered]);
 
   // Video playback logic
   useEffect(() => {
@@ -100,7 +105,12 @@ const HeroCarousel = ({ items }) => {
   const linkPath = `/${mediaType}/${currentItem.id}`;
 
   return (
-    <div ref={containerRef} className="relative h-[85vh] min-h-[600px] w-full bg-slate-900 overflow-hidden group">
+    <div
+      ref={containerRef}
+      className="relative h-[85vh] min-h-[600px] w-full bg-slate-900 overflow-hidden group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Background Layer */}
       <div className="absolute inset-0 transition-opacity duration-1000">
         {/* Fallback Image */}
@@ -183,7 +193,7 @@ const HeroCarousel = ({ items }) => {
                   </svg>
                 ) : (
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                 )}
               </button>
@@ -191,6 +201,26 @@ const HeroCarousel = ({ items }) => {
           </div>
         </div>
       </div>
+
+      {/* Carousel Navigation Buttons (Glassy) */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100 border border-white/10"
+        aria-label="Previous slide"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white transition-all opacity-0 group-hover:opacity-100 border border-white/10"
+        aria-label="Next slide"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
 
       {/* Carousel Indicators (Hotstar Style) */}
       <div className="absolute bottom-10 right-10 flex space-x-3">
