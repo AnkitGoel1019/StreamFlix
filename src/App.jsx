@@ -6,6 +6,9 @@ import Movies from "./pages/Movies";
 import TVShows from "./pages/TVShows";
 import MovieDetails from "./pages/MovieDetails";
 import TVDetails from "./pages/TVDetails";
+import PersonDetails from "./pages/PersonDetails";
+import Search from "./pages/Search";
+import MyList from "./pages/MyList";
 import NotFound from "./pages/NotFound.jsx";
 import FAQ from "./pages/FAQ.jsx";
 
@@ -20,6 +23,9 @@ const App = () => {
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/tv" element={<TVShows />} />
         <Route path="/tv/:id" element={<TVDetails />} />
+        <Route path="/person/:id" element={<PersonDetails />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/mylist" element={<MyList />} />
         <Route path="/about" element={<About />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="*" element={<NotFound />} />
